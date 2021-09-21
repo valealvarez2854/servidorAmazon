@@ -1,15 +1,21 @@
 const express = require('express')
+const { conectarBD }=require('../database/conexion.js')
 
 class ServidorModelo{
     constructor(){
 
         this.app = express();
+        this.levantarBD();
         this.llamarRutas(); //configuracion de express (get-post/put/delete)
     }
+
     levantarSevidor(){
         this.app.listen(process.env.PUERTO,function(){
             console.log("servidor encendido"+process.env.PUERTO)
         });
+    }
+    levantarBD(){
+      conectarBD();
     }
 
     llamarRutas(){
@@ -30,3 +36,4 @@ class ServidorModelo{
            
     }
 }
+module.exports=ServidorModelo;
